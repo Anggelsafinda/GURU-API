@@ -30,10 +30,16 @@ INSERT INTO users (username, password, role) VALUES
 ON DUPLICATE KEY UPDATE username=username;
 
 -- Insert data awal untuk Teacher
--- Mengaitkan guru dengan admin_id (misal: admin1 yang memiliki id=1)
+-- Mengaitkan guru dengan admin_id
+-- Data untuk admin (ID=3 setelah admin1=1 dan admin2=2, atau sesuai urutan)
+-- Data untuk admin1 (ID=1) dan admin2 (ID=2)
 INSERT INTO teachers (nip, name, subject, is_active, admin_id) VALUES 
 ('198001012005011001', 'Budi Santoso', 'Matematika', TRUE, 1),
 ('198202022006022002', 'Siti Aminah', 'Bahasa Indonesia', TRUE, 1),
 ('198503032010031003', 'Andi Hermawan', 'Fisika', FALSE, 2),
-('199004042015042004', 'Rina Marlina', 'Kimia', TRUE, 2)
+('199004042015042004', 'Rina Marlina', 'Kimia', TRUE, 2),
+('201001012010011001', 'Guru Matematika', 'Matematika', TRUE, (SELECT id FROM users WHERE username='admin')),
+('201102022011022002', 'Guru Bahasa Indonesia', 'Bahasa Indonesia', TRUE, (SELECT id FROM users WHERE username='admin')),
+('201203032012033003', 'Guru Fisika', 'Fisika', TRUE, (SELECT id FROM users WHERE username='admin')),
+('201304042013044004', 'Guru Kimia', 'Kimia', TRUE, (SELECT id FROM users WHERE username='admin'))
 ON DUPLICATE KEY UPDATE nip=nip;

@@ -20,10 +20,15 @@ public class CustomUserDetailsService implements UserDetailsService {
     /**
      * Mengambil detail user berdasarkan username dari database.
      * Fungsi ini otomatis dipakai oleh Spring Security pada saat login (Basic Auth).
+     * 
+     * Flow:
+     * 1. Cari user di database berdasarkan username
+     * 2. Jika ketemu, buat UserDetails object dengan data user tersebut
+     * 3. Jika tidak ketemu, throw UsernameNotFoundException
      *
-     * @param username username dari form/request login
-     * @return UserDetails object yang mengimplementasikan data login
-     * @throws UsernameNotFoundException Error jika username tidak ditemukan
+     * @param username Username yang dikirim melalui form/request login
+     * @return UserDetails object yang berisi username, password (hash), dan role untuk autentikasi
+     * @throws UsernameNotFoundException Jika username tidak ditemukan di database
      */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

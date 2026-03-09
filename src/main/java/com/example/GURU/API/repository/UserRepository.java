@@ -7,8 +7,17 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.example.GURU.API.model.User;
 
 /**
- * Repository interface untuk entity User.
- * Digunakan untuk melakukan operasi database terhadap tabel users.
+ * Repository interface untuk entity User (Admin/User Account).
+ * 
+ * Digunakan untuk melakukan operasi database (CRUD) terhadap tabel "users".
+ * Mengextend JpaRepository yang menyediakan methods CRUD dasar seperti save(), delete(), findAll().
+ * 
+ * Methods custom yang didefinisikan di sini akan otomatis di-generate oleh Spring Data JPA.
+ * Spring Data JPA menganalisis method name dan membuat query SQL secara otomatis:
+ * - Contoh: findByUsername(...) → SELECT * FROM users WHERE username = ?
+ * 
+ * Catatan: Berbeda dengan TeacherRepository yang mengextend Repository biasa,
+ * UserRepository mengextend JpaRepository karena ada kebutuhan delete operation.
  */
 public interface UserRepository extends JpaRepository<User, Long> {
 
